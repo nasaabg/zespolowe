@@ -3,4 +3,5 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   include DeviseTokenAuth::Concerns::SetUserByToken
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.json? }
+  respond_to :json
 end
