@@ -9,8 +9,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    [:last_name, :first_name, :gender, :address, :specialization, :phone_number, :date_of_birth].each do |p|
-      devise_parameter_sanitizer.for(:sign_up) << p
-    end
+    keys = [:last_name, :first_name, :gender, :address, :specialization, :phone_number, :date_of_birth]
+    devise_parameter_sanitizer.permit(:sign_up, keys: keys)
   end
 end
