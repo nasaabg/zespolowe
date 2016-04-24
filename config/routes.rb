@@ -6,7 +6,6 @@ Rails.application.routes.draw do
       resources :users, only: [:show, :index] do
         collection do 
           get 'me', to: "users#me"
-          put 'me', to: "users#update"
         end
       end
      end
