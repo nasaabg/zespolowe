@@ -2,13 +2,32 @@ class Api::V1::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:me]
 
   api!
+  description <<-EOS
+  === Success response - current user:
+    {
+      "user": {
+        "id": 10,
+        "first_name": "sssss",
+        "last_name": "bolo",
+        "nickname": null,
+        "email": "test8@onet.pl",
+        "created_at": "2016-04-25T15:23:04.787Z",
+        "phone_number": "12397213798729",
+        "address": null,
+        "gender": null,
+        "date_of_birth": null,
+        "specialization": null
+      }
+    }
+  EOS
   def me
     @user = current_user
     respond_with @user
   end
 
   api!
-  example <<-EOS
+  description <<-EOS
+  === Success response:
     "users": [
     {
       "id": 2,
@@ -44,7 +63,8 @@ class Api::V1::UsersController < ApplicationController
 
   api!
   param :id, :number
-  example <<-EOS
+  description <<-EOS
+  === Success response:
     "user": {
       "id": 2,
       "first_name": null,
@@ -57,7 +77,7 @@ class Api::V1::UsersController < ApplicationController
       "gender": null,
       "date_of_birth": null,
       "specialization": null
-  }
+    }
   EOS
   def show
     @user = User.find(params[:id])

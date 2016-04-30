@@ -9,6 +9,8 @@ Rails.application.routes.draw do
           get 'me', to: "users#me"
         end
       end
+
+      resources :questions
      end
    end
 end
