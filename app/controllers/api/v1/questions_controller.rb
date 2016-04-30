@@ -50,6 +50,7 @@ class Api::V1::QuestionsController < ApplicationController
   param :title, String
   param :description, String
   description <<-EOS
+  === Wymagana autentykacja
   === Success response:
     {
     "id": 5,
@@ -75,6 +76,7 @@ class Api::V1::QuestionsController < ApplicationController
   param :title, String, required: false
   param :description, String, required: false
   description <<-EOS
+  === Wymagana autentykacja
   === Success response 
     {
       "id": 5,

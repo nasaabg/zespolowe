@@ -3,6 +3,7 @@ class Api::V1::UsersController < ApplicationController
 
   api!
   description <<-EOS
+  === Wymagana autentykacja
   === Success response - current user:
     {
       "user": {
