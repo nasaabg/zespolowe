@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# puts "Push to heroku"
+# exec 'echo git push heroku master'
+
+# puts "Heroku migrate"
+# exec 'echo heroku run rake db:migrate'
+
+# puts "Restart heroku"
+# exec "echo heroku restart"
