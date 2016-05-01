@@ -29,16 +29,15 @@ class Api::V1::QuestionsController < ApplicationController
   end
 
   api!
-  param :id, :number, required: true
   description <<-EOS
   === Success response:
     {
-    "id": 1,
-    "title": "dsasasdsa",
-    "description": "saassasaasasadasasddsaadsasdsdadssadsaasassda",
-    "tags": ["awesome", "good"],
-    "created_at": "2016-04-30T10:47:34.199Z",
-    "user_id": 10
+      "id": 1,
+      "title": "dsasasdsa",
+      "description": "saassasaasasadasasddsaadsasdsdadssadsaasassda",
+      "tags": ["awesome", "good"],
+      "created_at": "2016-04-30T10:47:34.199Z",
+      "user_id": 10
     }
   EOS
   def show
@@ -49,17 +48,28 @@ class Api::V1::QuestionsController < ApplicationController
   api!
   param :title, String
   param :description, String
+  param :tag_list, Array
   description <<-EOS
   === Wymagana autentykacja
   === Success response:
     {
-    "id": 5,
-    "title": "title1",
-    "description": "This is my question",
-    "tags": ["awesome", "good"],
-    "created_at": "2016-04-30T11:02:16.706Z",
-    "user_id": 10
+      "id": 5,
+      "title": "title1",
+      "description": "This is my question",
+      "tags": ["awesome", "good"],
+      "created_at": "2016-04-30T11:02:16.706Z",
+      "user_id": 10
     }
+  EOS
+  example <<-EOS
+  Example json to create Question
+  {
+    "question":{
+        "title": "title9",
+        "description": "This is my question1",
+        "tag_list": ["ios", "java"]
+    }
+  }
   EOS
   def create
     question = current_user.questions.build(question_params)
@@ -71,10 +81,11 @@ class Api::V1::QuestionsController < ApplicationController
     end
   end
 
-  api!
+  api :PUT, '/questions/:id'
   param :id, :number, required: true
   param :title, String, required: false
   param :description, String, required: false
+  param :tag_list, Array, required: false
   description <<-EOS
   === Wymagana autentykacja
   === Success response 
@@ -86,6 +97,15 @@ class Api::V1::QuestionsController < ApplicationController
       "created_at": "2016-04-30T11:02:16.706Z",
       "user_id": 10
     }
+  EOS
+  example <<-EOS
+  Example json to update Question   
+  {
+    "question":{
+        "title": "title9",
+        "tag_list": ["ios", "java"]
+    }
+  }
   EOS
   def update
     question = current_user.questions.find(params[:id])
@@ -99,6 +119,6 @@ class Api::V1::QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :description, :tag_list)
+    params.require(:question).permit(:title, :description, tag_list: [])
   end
 end
