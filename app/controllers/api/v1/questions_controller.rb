@@ -8,7 +8,7 @@ class Api::V1::QuestionsController < ApplicationController
     {
       "id": 1,
       "title": "dsasasdsa",
-      "description": "saassasaasasadasasddsaadsasdsdadssadsaasassda",
+      "description": "Question is a question",
       "tags": ["awesome", "good"],
       "created_at": "2016-04-30T10:47:34.199Z",
       "user_id": 10
@@ -16,12 +16,15 @@ class Api::V1::QuestionsController < ApplicationController
     {
       "id": 2,
       "title": "titile 2",
-      "description": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+      "description": "How to fix Java bugs",
       "tags": ["ruby", "skills"],
       "created_at": "2016-04-30T10:47:48.859Z",
       "user_id": 10
     }
     ]
+  EOS
+  example <<-EOS
+  GET api/questions
   EOS
   def index
     @questions = Question.all
@@ -32,13 +35,16 @@ class Api::V1::QuestionsController < ApplicationController
   description <<-EOS
   === Success response:
     {
-      "id": 1,
+      "id": 6,
       "title": "dsasasdsa",
-      "description": "saassasaasasadasasddsaadsasdsdadssadsaasassda",
+      "description": "This is my question!",
       "tags": ["awesome", "good"],
       "created_at": "2016-04-30T10:47:34.199Z",
       "user_id": 10
     }
+  EOS
+  example <<-EOS
+  GET api/questions/6
   EOS
   def show
     @question = Question.find(params[:id])
@@ -82,7 +88,6 @@ class Api::V1::QuestionsController < ApplicationController
   end
 
   api :PUT, '/questions/:id'
-  param :id, :number, required: true
   param :title, String, required: false
   param :description, String, required: false
   param :tag_list, Array, required: false
@@ -99,7 +104,7 @@ class Api::V1::QuestionsController < ApplicationController
     }
   EOS
   example <<-EOS
-  Example json to update Question   
+  Example json to update Question
   {
     "question":{
         "title": "title9",
@@ -114,6 +119,50 @@ class Api::V1::QuestionsController < ApplicationController
     else
       render json: { errors: question.errors }, status: 422
     end
+  end
+
+  api!
+  example <<-EOS
+  Example request: 
+  GET /api/questions/taggable?tags=awesome,ruby
+  EOS
+  description <<-EOS
+  === Success response 
+    {
+      "questions": [
+          {
+            "id": 1,
+            "title": "dsasasdsa",
+            "description": "My question?",
+            "tags": [
+              "ruby",
+              "iphone"
+            ],
+            "created_at": "2016-04-30T10:47:34.199Z",
+            "user_id": 10
+          },
+          {
+            "id": 7,
+            "title": "tags",
+            "description": "This is it...",
+            "tags": [
+              "c++",
+              "java",
+              "badass",
+              "skills",
+              "ruby",
+              "awesome"
+            ],
+            "created_at": "2016-05-01T10:02:28.813Z",
+            "user_id": 5
+          }
+        ]
+      }
+  EOS
+  def taggable
+    tags = params[:tags] || []
+    questions = Question.tagged_with(tags, :any => true)
+    respond_with questions
   end
 
   private

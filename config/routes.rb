@@ -10,7 +10,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :questions
+      resources :questions do
+        collection do
+          get "taggable", to: "questions#taggable"
+        end
+      end
       resources :tags, only: [:index] do
         collection do
           get "least-used", to: "tags#least_used"

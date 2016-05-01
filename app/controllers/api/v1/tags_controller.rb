@@ -28,6 +28,9 @@ class Api::V1::TagsController < ApplicationController
       ]
     }
   EOS
+  example <<-EOS
+  GET api/tags
+  EOS
   def index
     tags = ActsAsTaggableOn::Tag.all
     respond_with tags
@@ -56,6 +59,9 @@ class Api::V1::TagsController < ApplicationController
       ]
     }
   EOS
+  example <<-EOS
+  GET api/most-used
+  EOS
   def most_used
     most_used = ActsAsTaggableOn::Tag.most_used(10)
     respond_with most_used
@@ -78,6 +84,9 @@ class Api::V1::TagsController < ApplicationController
         }
       ]
     }
+  EOS
+  example <<-EOS
+  GET api/least-used
   EOS
   def least_used 
     least_used = ActsAsTaggableOn::Tag.least_used(10)
