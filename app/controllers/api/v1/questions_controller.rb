@@ -9,16 +9,16 @@ class Api::V1::QuestionsController < ApplicationController
       "id": 1,
       "title": "dsasasdsa",
       "description": "saassasaasasadasasddsaadsasdsdadssadsaasassda",
+      "tags": ["awesome", "good"],
       "created_at": "2016-04-30T10:47:34.199Z",
-      "updated_at": "2016-04-30T10:47:34.199Z"
       "user_id": 10
     },
     {
       "id": 2,
       "title": "titile 2",
       "description": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+      "tags": ["ruby", "skills"],
       "created_at": "2016-04-30T10:47:48.859Z",
-      "updated_at": "2016-04-30T10:47:48.859Z"
       "user_id": 10
     }
     ]
@@ -36,8 +36,8 @@ class Api::V1::QuestionsController < ApplicationController
     "id": 1,
     "title": "dsasasdsa",
     "description": "saassasaasasadasasddsaadsasdsdadssadsaasassda",
+    "tags": ["awesome", "good"],
     "created_at": "2016-04-30T10:47:34.199Z",
-    "updated_at": "2016-04-30T10:47:34.199Z"
     "user_id": 10
     }
   EOS
@@ -56,8 +56,8 @@ class Api::V1::QuestionsController < ApplicationController
     "id": 5,
     "title": "title1",
     "description": "This is my question",
+    "tags": ["awesome", "good"],
     "created_at": "2016-04-30T11:02:16.706Z",
-    "updated_at": "2016-04-30T11:02:16.706Z"
     "user_id": 10
     }
   EOS
@@ -82,8 +82,8 @@ class Api::V1::QuestionsController < ApplicationController
       "id": 5,
       "title": "title4",
       "description": "This is my question",
+      "tags": ["awesome", "good"],
       "created_at": "2016-04-30T11:02:16.706Z",
-      "updated_at": "2016-04-30T11:16:28.402Z",
       "user_id": 10
     }
   EOS
