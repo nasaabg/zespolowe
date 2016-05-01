@@ -38,6 +38,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (3.5.0)
+      activerecord (>= 3.2, < 5)
     apipie-rails (0.3.6)
       json
     arel (6.0.3)
@@ -220,6 +222,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.9)
+  acts-as-taggable-on (~> 3.4)
   apipie-rails
   better_errors
   binding_of_caller

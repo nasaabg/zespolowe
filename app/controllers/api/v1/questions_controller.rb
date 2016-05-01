@@ -99,6 +99,6 @@ class Api::V1::QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :description)
+    params.require(:question).permit(:title, :description, :tag_list)
   end
 end
