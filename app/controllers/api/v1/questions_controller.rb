@@ -54,7 +54,8 @@ class Api::V1::QuestionsController < ApplicationController
   api!
   param :title, String
   param :description, String
-  param :tag_list, Array
+  param :tag_list, Array, of: String
+
   description <<-EOS
   === Wymagana autentykacja
   === Success response:
@@ -90,7 +91,7 @@ class Api::V1::QuestionsController < ApplicationController
   api :PUT, '/questions/:id'
   param :title, String, required: false
   param :description, String, required: false
-  param :tag_list, Array, required: false
+  param :tag_list, Array, of: String, required: false
   description <<-EOS
   === Wymagana autentykacja
   === Success response 
