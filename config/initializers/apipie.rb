@@ -20,4 +20,6 @@ Apipie.configure do |config|
     Kazdy reposne w kontekstem Usera zwraca w headers nowe tokeny i expTime.
    EOS
 
+   config.copyright = "All rights reserved Jan Kurzydło &#169;"
+
 end
