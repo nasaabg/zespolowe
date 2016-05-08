@@ -1,6 +1,6 @@
 class Api::V1::QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update]
-  
+
   api!
   description <<-EOS
   === Success response:
@@ -11,7 +11,20 @@ class Api::V1::QuestionsController < ApplicationController
       "description": "Question is a question",
       "tags": ["awesome", "good"],
       "created_at": "2016-04-30T10:47:34.199Z",
-      "user_id": 10
+      "user_id": 10,
+      "user": {
+        "id": 10,
+        "first_name": "sssss",
+        "last_name": "bolo",
+        "nickname": null,
+        "email": "test8@onet.pl",
+        "created_at": "2016-04-25T15:23:04.787Z",
+        "phone_number": "12397213798729",
+        "address": null,
+        "gender": null,
+        "date_of_birth": null,
+        "specialization": null
+      }
     },
     {
       "id": 2,
@@ -19,7 +32,20 @@ class Api::V1::QuestionsController < ApplicationController
       "description": "How to fix Java bugs",
       "tags": ["ruby", "skills"],
       "created_at": "2016-04-30T10:47:48.859Z",
-      "user_id": 10
+      "user_id": 10,
+      "user": {
+        "id": 10,
+        "first_name": "sssss",
+        "last_name": "bolo",
+        "nickname": null,
+        "email": "test8@onet.pl",
+        "created_at": "2016-04-25T15:23:04.787Z",
+        "phone_number": "12397213798729",
+        "address": null,
+        "gender": null,
+        "date_of_birth": null,
+        "specialization": null
+      }
     }
     ]
   EOS
@@ -41,6 +67,19 @@ class Api::V1::QuestionsController < ApplicationController
       "tags": ["awesome", "good"],
       "created_at": "2016-04-30T10:47:34.199Z",
       "user_id": 10
+      "user": {
+        "id": 10,
+        "first_name": "sssss",
+        "last_name": "bolo",
+        "nickname": null,
+        "email": "test8@onet.pl",
+        "created_at": "2016-04-25T15:23:04.787Z",
+        "phone_number": "12397213798729",
+        "address": null,
+        "gender": null,
+        "date_of_birth": null,
+        "specialization": null
+      }
     }
   EOS
   example <<-EOS
@@ -140,7 +179,20 @@ class Api::V1::QuestionsController < ApplicationController
               "iphone"
             ],
             "created_at": "2016-04-30T10:47:34.199Z",
-            "user_id": 10
+            "user_id": 10,
+              "user": {
+                "id": 10,
+                "first_name": "sssss",
+                "last_name": "bolo",
+                "nickname": null,
+                "email": "test8@onet.pl",
+                "created_at": "2016-04-25T15:23:04.787Z",
+                "phone_number": "12397213798729",
+                "address": null,
+                "gender": null,
+                "date_of_birth": null,
+                "specialization": null
+              }
           },
           {
             "id": 7,
@@ -155,7 +207,20 @@ class Api::V1::QuestionsController < ApplicationController
               "awesome"
             ],
             "created_at": "2016-05-01T10:02:28.813Z",
-            "user_id": 5
+            "user_id": 10,
+            "user": {
+              "id": 10,
+              "first_name": "sssss",
+              "last_name": "bolo",
+              "nickname": null,
+              "email": "test8@onet.pl",
+              "created_at": "2016-04-25T15:23:04.787Z",
+              "phone_number": "12397213798729",
+              "address": null,
+              "gender": null,
+              "date_of_birth": null,
+              "specialization": null
+            }
           }
         ]
       }
