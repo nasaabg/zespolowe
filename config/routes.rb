@@ -21,6 +21,10 @@ Rails.application.routes.draw do
           get "most-used", to: "tags#most_used"
         end
       end
+      resource :anwers do
+        collection do
+        end
+      end
     end
    end
 end
