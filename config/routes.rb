@@ -18,6 +18,10 @@ Rails.application.routes.draw do
             post "remove_point", to: "answers#remove_point"
           end
         end
+        member do
+          post "add_point", to: "questions#add_point"
+          post "remove_point", to: "questions#remove_point"
+        end
         collection do
           get "taggable", to: "questions#taggable"
         end

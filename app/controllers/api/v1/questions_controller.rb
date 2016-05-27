@@ -231,6 +231,30 @@ class Api::V1::QuestionsController < ApplicationController
     respond_with questions
   end
 
+  api!
+  def add_point
+    question = Question.find(params[:id])
+    render json: {}, status: 401 and return if current_user == question.user
+
+    if question.add_point!
+      render json: question, status: 200
+    else
+      render json: { errors: question.errors }, status: 422
+    end
+  end
+
+  api!
+  def remove_point
+    question = Answer.find(params[:id])
+    render json: {}, status: 401 and return if current_user == question.user
+
+    if question.remove_point!
+      render json: question, status: 200
+    else
+      render json: { errors: question.errors }, status: 422
+    end
+  end
+
   private
 
   def question_params
