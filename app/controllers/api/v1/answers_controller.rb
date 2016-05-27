@@ -137,6 +137,31 @@ class Api::V1::AnswersController < ApplicationController
     end
   end
 
+  api!
+  def add_point
+    answer = Answer.find(params[:id])
+    render json: {}, status: 401 and return if current_user == answer.user
+
+    if answer.add_point!
+      render json: answer, status: 200
+    else
+      render json: { errors: answer.errors }, status: 422
+    end
+  end
+
+  api!
+  def remove_point
+    answer = Answer.find(params[:id])
+    render json: {}, status: 401 and return if current_user == answer.user
+
+    if answer.remove_point!
+      render json: answer, status: 200
+    else
+      render json: { errors: answer.errors }, status: 422
+    end
+  end
+
+
   private
 
   def answer_params

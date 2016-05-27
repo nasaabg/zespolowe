@@ -14,6 +14,8 @@ Rails.application.routes.draw do
         resources :answers do
           member do
             post "accept", to: "answers#accept"
+            post "add_point", to: "answers#add_point"
+            post "remove_point", to: "answers#remove_point"
           end
         end
         collection do
