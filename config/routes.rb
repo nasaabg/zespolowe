@@ -5,16 +5,18 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     scope module: :v1 do
       resources :users, only: [:show, :index] do
-        collection do 
+        collection do
           get 'me', to: "users#me"
         end
       end
 
       resources :questions do
+        resources :answers
         collection do
           get "taggable", to: "questions#taggable"
         end
       end
+
       resources :tags, only: [:index] do
         collection do
           get "least-used", to: "tags#least_used"
