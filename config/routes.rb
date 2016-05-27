@@ -11,7 +11,11 @@ Rails.application.routes.draw do
       end
 
       resources :questions do
-        resources :answers
+        resources :answers do
+          member do
+            post "accept", to: "answers#accept"
+          end
+        end
         collection do
           get "taggable", to: "questions#taggable"
         end
