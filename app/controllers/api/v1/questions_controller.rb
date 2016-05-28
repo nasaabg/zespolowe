@@ -245,7 +245,7 @@ class Api::V1::QuestionsController < ApplicationController
 
   api!
   def remove_point
-    question = Answer.find(params[:id])
+    question = Question.find(params[:id])
     render json: {}, status: 401 and return if current_user == question.user
 
     if question.remove_point!
