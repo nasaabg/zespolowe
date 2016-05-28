@@ -1,5 +1,5 @@
 class Api::V1::QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update]
+  before_action :authenticate_user!, only: [:create, :update, :add_point, :remove_point]
 
   api!
   description <<-EOS
@@ -133,7 +133,7 @@ class Api::V1::QuestionsController < ApplicationController
   param :tag_list, Array, of: String, required: false
   description <<-EOS
   === Wymagana autentykacja
-  === Success response 
+  === Success response
     {
       "id": 5,
       "title": "title4",
@@ -163,11 +163,11 @@ class Api::V1::QuestionsController < ApplicationController
 
   api!
   example <<-EOS
-  Example request: 
+  Example request:
   GET /api/questions/taggable?tags=awesome,ruby
   EOS
   description <<-EOS
-  === Success response 
+  === Success response
     {
       "questions": [
           {

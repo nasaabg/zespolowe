@@ -1,5 +1,5 @@
 class Api::V1::AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :accept]
+  before_action :authenticate_user!, only: [:create, :update, :accept, :add_point, :remove_point]
   before_filter :get_question
 
    api!
@@ -116,7 +116,6 @@ class Api::V1::AnswersController < ApplicationController
   }
   EOS
   def update
-    current_user = User.last
     answer = current_user.answers.find(params[:id])
     if answer.update(answer_params)
       render json: answer, status: 200
