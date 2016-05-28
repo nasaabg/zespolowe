@@ -11,7 +11,9 @@ Rails.application.routes.draw do
       end
 
       resources :questions do
+        resources :comments, only: [:index, :show, :create]
         resources :answers do
+          resources :comments, only: [:index, :show, :create]
           member do
             post "accept", to: "answers#accept"
             post "add_point", to: "answers#add_point"

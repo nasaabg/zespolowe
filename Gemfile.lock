@@ -40,6 +40,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
+    acts_as_commentable (4.0.2)
     apipie-rails (0.3.6)
       json
     arel (6.0.3)
@@ -223,6 +224,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.9)
   acts-as-taggable-on (~> 3.4)
+  acts_as_commentable
   apipie-rails
   better_errors
   binding_of_caller
