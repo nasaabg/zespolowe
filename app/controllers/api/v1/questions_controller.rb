@@ -1,5 +1,5 @@
 class Api::V1::QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :add_point, :remove_point]
+  #before_action :authenticate_user!, only: [:create, :update, :add_point, :remove_point]
 
   api!
   description <<-EOS
@@ -234,9 +234,9 @@ class Api::V1::QuestionsController < ApplicationController
   api!
   def add_point
     question = Question.find(params[:id])
-    render json: {}, status: 401 and return if current_user == question.user
+    render json: {}, status: 401 and return if !question.can_add_point?(current_user)
 
-    if question.add_point!
+    if question.add_point!(current_user.id)
       render json: question, status: 200
     else
       render json: { errors: question.errors }, status: 422
@@ -246,9 +246,9 @@ class Api::V1::QuestionsController < ApplicationController
   api!
   def remove_point
     question = Question.find(params[:id])
-    render json: {}, status: 401 and return if current_user == question.user
+    render json: {}, status: 401 and return if !question.can_sub_point?(current_user)
 
-    if question.remove_point!
+    if question.remove_point!(current_user.id)
       render json: question, status: 200
     else
       render json: { errors: question.errors }, status: 422

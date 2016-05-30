@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530074945) do
+ActiveRecord::Schema.define(version: 20160530095715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(version: 20160530074945) do
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "question_points", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.boolean  "addition",    default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "question_points", ["question_id"], name: "index_question_points_on_question_id", using: :btree
+  add_index "question_points", ["user_id"], name: "index_question_points_on_user_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
@@ -126,5 +137,7 @@ ActiveRecord::Schema.define(version: 20160530074945) do
   add_foreign_key "answer_points", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "question_points", "questions"
+  add_foreign_key "question_points", "users"
   add_foreign_key "questions", "users"
 end
