@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528094513) do
+ActiveRecord::Schema.define(version: 20160530074945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answer_points", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "answer_id"
+    t.boolean  "addition",   default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "answer_points", ["answer_id"], name: "index_answer_points_on_answer_id", using: :btree
+  add_index "answer_points", ["user_id"], name: "index_answer_points_on_user_id", using: :btree
 
   create_table "answers", force: :cascade do |t|
     t.text     "body"
@@ -111,6 +122,8 @@ ActiveRecord::Schema.define(version: 20160528094513) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
+  add_foreign_key "answer_points", "answers"
+  add_foreign_key "answer_points", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "questions", "users"

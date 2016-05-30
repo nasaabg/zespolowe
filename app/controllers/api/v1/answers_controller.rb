@@ -2,7 +2,7 @@ class Api::V1::AnswersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :accept]
   before_filter :get_question
 
-   api!
+  api!
   description <<-EOS
   === Success response:
   {
@@ -116,7 +116,6 @@ class Api::V1::AnswersController < ApplicationController
   }
   EOS
   def update
-    current_user = User.last
     answer = current_user.answers.find(params[:id])
     if answer.update(answer_params)
       render json: answer, status: 200
@@ -140,9 +139,9 @@ class Api::V1::AnswersController < ApplicationController
   api!
   def add_point
     answer = Answer.find(params[:id])
-    render json: {}, status: 401 and return if current_user == answer.user
+    render json: {}, status: 401 and return if !answer.can_add_point?(current_user)
 
-    if answer.add_point!
+    if answer.add_point!(current_user.id)
       render json: answer, status: 200
     else
       render json: { errors: answer.errors }, status: 422
@@ -152,9 +151,9 @@ class Api::V1::AnswersController < ApplicationController
   api!
   def remove_point
     answer = Answer.find(params[:id])
-    render json: {}, status: 401 and return if current_user == answer.user
+    render json: {}, status: 401 and return if !answer.can_sub_point?(current_user)
 
-    if answer.remove_point!
+    if answer.remove_point!(current_user.id)
       render json: answer, status: 200
     else
       render json: { errors: answer.errors }, status: 422
@@ -163,7 +162,6 @@ class Api::V1::AnswersController < ApplicationController
 
 
   private
-
   def answer_params
     params.require(:answer).permit(:body)
   end
