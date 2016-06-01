@@ -1,5 +1,5 @@
 class QuestionSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :tags, :created_at, :user_id, :counter, :points
+  attributes :id, :title, :description, :tags, :created_at, :user_id, :points
 
   has_one :user
 
@@ -8,6 +8,6 @@ class QuestionSerializer < ActiveModel::Serializer
   end
 
   def points
-    object.points
+    object.question_points.count
   end
 end
