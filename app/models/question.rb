@@ -10,20 +10,14 @@ class Question < ActiveRecord::Base
   end
 
   def remove_point!(user_id)
-    question_points.create(user_id: user_id, addition: false)
-  end
-
-  def points
-    additions = question_points.where(addition: true).count
-    subtractions = question_points.where(addition: false).count
-    additions - subtractions
+    question_points.where(user_id: user_id).first.destroy
   end
 
   def can_add_point?(giver)
-    giver != user && question_points.where(user_id: giver.id, addition: true).empty?
+    giver != user && question_points.where(user_id: giver.id).empty?
   end
 
   def can_sub_point?(giver)
-    giver != user && question_points.where(user_id: giver.id, addition: false).empty?
+    giver != user && question_points.where(user_id: giver.id).any?
   end
 end
