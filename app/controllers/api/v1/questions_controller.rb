@@ -1,5 +1,5 @@
 class Api::V1::QuestionsController < ApplicationController
-  #before_action :authenticate_user!, only: [:create, :update, :add_point, :remove_point]
+  before_action :authenticate_user!, only: [:create, :update, :add_point, :remove_point]
 
   api!
   description <<-EOS

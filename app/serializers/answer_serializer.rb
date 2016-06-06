@@ -5,6 +5,6 @@ class AnswerSerializer < ActiveModel::Serializer
   has_one :user
 
   def points
-    object.points
+    object.answer_points.count
   end
 end
