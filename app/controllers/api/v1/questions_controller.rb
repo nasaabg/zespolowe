@@ -153,7 +153,7 @@ class Api::V1::QuestionsController < ApplicationController
   }
   EOS
   def update
-    question = current_user.questions.find(params[:id])
+   question = current_user.questions.find(params[:id])
     if question.update(question_params)
       render json: question, status: 200, location: [:api, question]
     else
@@ -258,6 +258,6 @@ class Api::V1::QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :description, tag_list: [])
+    params.permit(:title, :description, tag_list: [])
   end
 end
