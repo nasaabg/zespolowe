@@ -118,7 +118,7 @@ class Api::V1::QuestionsController < ApplicationController
   }
   EOS
   def create
-    question = current_user.questions.build(question_params)
+    question = current_user.questions.build(question_params_build)
 
     if question.save
       render json: question, status: 201
@@ -259,5 +259,9 @@ class Api::V1::QuestionsController < ApplicationController
 
   def question_params
     params.permit(:title, :description, tag_list: [])
+  end
+
+  def question_params_build
+    params.require(:question).permit(:title, :description, tag_list: [])
   end
 end
